@@ -4,9 +4,9 @@ import fs from "fs";
 
 const getRequestWithCertificate = async () => {
   try {
-    const cert = fs.readFileSync("certs/charles-client.crt");
-    const key = fs.readFileSync("certs/charles-client.key");
-    const hostName = "127.0.0.1:3000";
+    const cert = fs.readFileSync("certs/client.crt");
+    const key = fs.readFileSync("certs/client.key");
+    const hostName = "10.170.0.3";
     const httpsAgent = new https.Agent({
       cert,
       key,
