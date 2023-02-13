@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  # Compose will build and tag it with >> node_basic
+  node_basic:
+    # Path to the directory containing the NodeJS Dockerfile. 
+    build:
+      context: node-server
+    ports:
+      - 3000:3000
+    working_dir: /usr/src/app
+    
+  # Compose will build and tag it with >> nginx
+  nginx:
+    image: nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    # Mount paths as volumes, specifying the path on the host machine
+    # (HOST:CONTAINER), or an access mode (HOST:CONTAINER:ro).
+    #
+    # ./nginx-server/proxy.conf - contains NGINX configuration
+    # ./certs - directory contains generated certificates
+    volumes:
+      - ./nginx-server/proxy.conf:/etc/nginx/conf.d/default.conf
+      - ./certs/server.crt:/etc/ssl/charles-server.crt
+      - ./certs/server.key:/etc/ssl/charles-server.key
