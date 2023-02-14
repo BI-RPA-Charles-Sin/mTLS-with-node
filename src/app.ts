@@ -13,7 +13,12 @@ app.get("/api/test", (req: Request, res: Response, next: NextFunction) => {
   let decodeCert = decodeURIComponent(`${sslCert}`);
 
   const cert = forge.pki.certificateFromPem(`${decodeCert}`);
-  console.log(cert);
+
+  const { serialNumber, signature, signatureOid, subject } = cert;
+  console.log(serialNumber);
+  console.log(signature);
+  console.log(signatureOid);
+  console.log(subject);
 
   res.status(200).json({
     message: "certificate verified succesfully",
